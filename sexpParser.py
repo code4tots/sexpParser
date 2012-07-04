@@ -1,6 +1,13 @@
 
 class ParserException(Exception): pass
 
+# Atom class is to indicate that the object is
+# not a simple string but an atom.
+class Atom(str):
+    def __repr__(self): return str(self)
+    def __str__(self):
+        return super(Atom,self).__str__()
+
 # parse S-expressions
 class Parser:
     def __init__(self,f):
@@ -102,13 +109,13 @@ class Parser:
         return ret
         
     def parseAtom(self):
-        if self.c in ['(','"',"'"]:
-            raise ParserException('Atoms cannot start with (, ", or \'')
+        if self.c in ['(',')','"',"'"]:
+            raise ParserException('Atoms cannot start with (, ), ", or \'')
         ret = ''
         while not ((self.c in ['','(', ')','"',"'"]) or self.c.isspace()):
             ret += self.c
             self.read()
-        return ret
+        return Atom(ret)
         
 def main():
     import sys
