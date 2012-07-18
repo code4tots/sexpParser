@@ -1,2 +1,6 @@
 07.03.2012
 Simple recursive descent S-expression parser in various languages, because I think they are handy.
+
+07.17.2012
+The directory 'new' contains a newer version, without literal string escapes.
+
